@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+            android:id="@+id/greetuserlbl"
+            style="@style/Text.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="Hello Alex Turnip"
+    />
+
+    <TextView
+            android:id="@+id/addressphonenumberlbl"
+            style="@style/Text.CaptionSmall"
+            android:layout_below="@id/greetuserlbl"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="1501 S Wolf Road | M : 2245186257"
+    />
+
+    <TextView
+            android:id="@+id/favbook"
+            style="@style/Text.CaptionSmall"
+            android:layout_below="@id/addressphonenumberlbl"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Fav Book :Sherlock"
+    />
+
+    <TextView
+            android:id="@+id/transactiondetails"
+            style="@style/Text.SubHeader"
+            android:layout_below="@id/favbook"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Transaction Details :"
+    />
+
+    <RelativeLayout
+            android:id="@+id/transactionid"
+            android:layout_below="@id/transactiondetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/transactionidlabel"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Transaction ID :"
+        />
+
+        <TextView
+                android:id="@+id/transactionidvalue"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="1DCPZSP6GDXP8"
+        />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/employeeid"
+            android:layout_below="@id/transactionid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/employeeidlabel"
+                android:layout_width="wrap_content"
+                style="@style/Text.Body"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Employee ID :"
+        />
+
+        <TextView
+                android:id="@+id/employeeidvalue"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="1FJPWTZFRJTVJ"
+        />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/totalamount"
+            android:layout_below="@id/employeeid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/totalamountlabel"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Total Amount :"
+        />
+
+        <TextView
+                android:id="@+id/totalamountvalue"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="$ 500"
+        />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/createdtimeid"
+            android:layout_below="@id/totalamount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/createdtimeidlabel"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Time of Transaction :"
+        />
+
+        <TextView
+                android:id="@+id/createdtimeidvalue"
+                style="@style/Text.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="July 26, 2016"
+        />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

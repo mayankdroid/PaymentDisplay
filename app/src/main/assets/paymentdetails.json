@@ -1,0 +1,493 @@
+{
+  "orders": [{
+    "payments": [{
+      "id": "4Z837JDXMRC92",
+      "amount": 2000,
+      "createdTime": 1.469554814E12,
+      "clientCreatedTime": 1.469554814E12,
+      "modifiedTime": 1.469554815E12,
+      "result": "SUCCESS",
+      "orderId": "P8QYMCNJ9Q91A",
+      "employeeId": "D3WBSX1RE88Y2",
+      "cardTransaction": {
+        "cardType": "MC",
+        "entryType": "EMV_CONTACT",
+        "last4": "0483",
+        "type": "AUTH",
+        "authCode": "378703",
+        "referenceId": "620800027467",
+        "state": "CLOSED"
+      },
+      "order": {
+        "id": "P8QYMCNJ9Q91A",
+        "currency": "USD",
+        "employeeId": "D3WBSX1RE88Y2",
+        "total": 2000,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469554813E12,
+        "clientCreatedTime": 1.469554813E12,
+        "modifiedTime": 1.469554815E12,
+        "deviceId": "20bd6d53-4b67-4b96-8cd7-961ceec4ba62"
+      },
+      "tender": {
+        "id": "1DCPZSP6GDXP8",
+        "editable": false,
+        "labelKey": "com.clover.tender.credit_card",
+        "label": "Credit Card",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "YKQ2SHATRNXD4",
+      "amount": 231,
+      "createdTime": 1.469554793E12,
+      "clientCreatedTime": 1.469554793E12,
+      "modifiedTime": 1.469554793E12,
+      "result": "SUCCESS",
+      "orderId": "11D933Q17QF0C",
+      "employeeId": "QZ5KBJCZBVGZA",
+      "cardTransaction": {
+        "cardType": "VISA",
+        "entryType": "EMV_CONTACTLESS",
+        "last4": "0265",
+        "type": "PREAUTH",
+        "authCode": "098265",
+        "referenceId": "620800027466",
+        "state": "PENDING"
+      },
+      "order": {
+        "id": "11D933Q17QF0C",
+        "currency": "USD",
+        "employeeId": "QZ5KBJCZBVGZA",
+        "total": 231,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469554792E12,
+        "clientCreatedTime": 1.469554792E12,
+        "modifiedTime": 1.469554794E12,
+        "deviceId": "ce11f986-b754-4cf8-ad08-3f2496ce2cbb"
+      },
+      "tender": {
+        "id": "PC3GG3G4AZE2E",
+        "editable": false,
+        "labelKey": "com.clover.tender.debit_card",
+        "label": "Debit Card",
+        "opensCashDrawer": false,
+        "enabled": true,
+        "visible": false
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "15HR4X4BBMT5C",
+      "amount": 2000,
+      "createdTime": 1.469554761E12,
+      "clientCreatedTime": 1.469554761E12,
+      "modifiedTime": 1.469554761E12,
+      "result": "SUCCESS",
+      "orderId": "0NS24CYVYFRXA",
+      "employeeId": "D3WBSX1RE88Y2",
+      "cardTransaction": {
+        "cardType": "MC",
+        "entryType": "EMV_CONTACT",
+        "last4": "0483",
+        "type": "AUTH",
+        "authCode": "014911",
+        "referenceId": "620800027465",
+        "state": "CLOSED"
+      },
+      "order": {
+        "id": "0NS24CYVYFRXA",
+        "currency": "USD",
+        "employeeId": "D3WBSX1RE88Y2",
+        "total": 2000,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.46955476E12,
+        "clientCreatedTime": 1.46955476E12,
+        "modifiedTime": 1.469554761E12,
+        "deviceId": "20bd6d53-4b67-4b96-8cd7-961ceec4ba62"
+      },
+      "tender": {
+        "id": "1DCPZSP6GDXP8",
+        "editable": false,
+        "labelKey": "com.clover.tender.credit_card",
+        "label": "Credit Card",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "W1QASX5894RWG",
+      "amount": 2220,
+      "createdTime": 1.469480269E12,
+      "clientCreatedTime": 1.469480269E12,
+      "modifiedTime": 1.469507751E12,
+      "result": "SUCCESS",
+      "orderId": "DDZMEKG93AA3G",
+      "employeeId": "D3WBSX1RE88Y2",
+      "cardTransaction": {
+        "cardType": "MC",
+        "entryType": "EMV_CONTACT",
+        "last4": "0483",
+        "type": "PREAUTH",
+        "authCode": "449951",
+        "referenceId": "620700027339",
+        "state": "CLOSED"
+      },
+      "order": {
+        "id": "DDZMEKG93AA3G",
+        "currency": "USD",
+        "employeeId": "D3WBSX1RE88Y2",
+        "total": 2220,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469480268E12,
+        "clientCreatedTime": 1.469480268E12,
+        "modifiedTime": 1.469507751E12,
+        "deviceId": "139c9199-7582-4663-85a5-465b250d0079"
+      },
+      "tender": {
+        "id": "1DCPZSP6GDXP8",
+        "editable": false,
+        "labelKey": "com.clover.tender.credit_card",
+        "label": "Credit Card",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "J3GFKVJZ6EMB8",
+      "amount": 855,
+      "createdTime": 1.46948017E12,
+      "clientCreatedTime": 1.46948017E12,
+      "modifiedTime": 1.46950775E12,
+      "result": "SUCCESS",
+      "orderId": "GYHKM58Z49WWA",
+      "employeeId": "D3WBSX1RE88Y2",
+      "cardTransaction": {
+        "cardType": "MC",
+        "entryType": "EMV_CONTACT",
+        "last4": "0483",
+        "type": "PREAUTH",
+        "authCode": "811885",
+        "referenceId": "620700027338",
+        "state": "CLOSED"
+      },
+      "order": {
+        "id": "GYHKM58Z49WWA",
+        "currency": "USD",
+        "employeeId": "D3WBSX1RE88Y2",
+        "total": 855,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469480168E12,
+        "clientCreatedTime": 1.469480168E12,
+        "modifiedTime": 1.469507751E12,
+        "deviceId": "139c9199-7582-4663-85a5-465b250d0079"
+      },
+      "tender": {
+        "id": "1DCPZSP6GDXP8",
+        "editable": false,
+        "labelKey": "com.clover.tender.credit_card",
+        "label": "Credit Card",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "MWFX2K4P79R3M",
+      "amount": 25,
+      "createdTime": 1.469472328E12,
+      "clientCreatedTime": 1.469472328E12,
+      "modifiedTime": 1.469472328E12,
+      "result": "SUCCESS",
+      "orderId": "WRKGSG97A1J1Y",
+      "employeeId": "CG0E4HBS30WCJ",
+      "note": "b ",
+      "order": {
+        "id": "WRKGSG97A1J1Y",
+        "currency": "USD",
+        "employeeId": "CG0E4HBS30WCJ",
+        "total": 25,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469472327E12,
+        "clientCreatedTime": 1.469472327E12,
+        "modifiedTime": 1.469472329E12,
+        "deviceId": "1643d100-5d59-4abb-89f5-66258625e332"
+      },
+      "tender": {
+        "id": "9FQXFZPDQKE18",
+        "editable": false,
+        "labelKey": "com.clover.tender.check",
+        "label": "Check",
+        "opensCashDrawer": false,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "amount": 903,
+      "taxAmount": 66,
+      "totalRefundAmount": 903,
+      "createdTime": 1.46947038E12,
+      "clientCreatedTime": 1.46947038E12,
+      "modifiedTime": 1.469470379E12,
+      "result": "SUCCESS",
+      "orderId": "V1E14ZSKPE9PA",
+      "employeeId": "GHAMY9NC93S6Y",
+      "refunds": [{
+        "id": "MB40A6EE4AVW6",
+        "orderId": "V1E14ZSKPE9PA",
+        "deviceId": "62fe23a4-f366-48cb-a86d-b928b30eeae8",
+        "amount": 903,
+        "taxAmount": 66,
+        "createdTime": 1.469470416E12,
+        "clientCreatedTime": 1.469470416E12,
+        "paymentId": "ZRSJE62EM2X52",
+        "employeeId": "GHAMY9NC93S6Y"
+      }],
+      "order": {
+        "id": "V1E14ZSKPE9PA",
+        "currency": "USD",
+        "employeeId": "GHAMY9NC93S6Y",
+        "total": 903,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": false,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469470377E12,
+        "clientCreatedTime": 1.469470377E12,
+        "modifiedTime": 1.469470416E12,
+        "deviceId": "62fe23a4-f366-48cb-a86d-b928b30eeae8"
+      },
+      "tender": {
+        "id": "V6E8ZAM7M8ACG",
+        "editable": false,
+        "labelKey": "com.clover.tender.cash",
+        "label": "Cash",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "234N59BGFATY4",
+      "amount": 172,
+      "createdTime": 1.469221598E12,
+      "clientCreatedTime": 1.469221598E12,
+      "modifiedTime": 1.469248542E12,
+      "result": "SUCCESS",
+      "orderId": "55FF9SGBG966C",
+      "employeeId": "QZ5KBJCZBVGZA",
+      "cardTransaction": {
+        "cardType": "MC",
+        "entryType": "EMV_CONTACT",
+        "last4": "4111",
+        "type": "PREAUTH",
+        "authCode": "665337",
+        "referenceId": "620400027246",
+        "state": "CLOSED"
+      },
+      "order": {
+        "id": "55FF9SGBG966C",
+        "currency": "USD",
+        "employeeId": "QZ5KBJCZBVGZA",
+        "total": 172,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469221597E12,
+        "clientCreatedTime": 1.469221597E12,
+        "modifiedTime": 1.469248543E12,
+        "deviceId": "368bc106-1e26-4a7f-8233-36bbec05f98e"
+      },
+      "tender": {
+        "id": "1DCPZSP6GDXP8",
+        "editable": false,
+        "labelKey": "com.clover.tender.credit_card",
+        "label": "Credit Card",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "K3B47GRF0DBXJ",
+      "amount": 500,
+      "createdTime": 1.469132243E12,
+      "clientCreatedTime": 1.469132243E12,
+      "modifiedTime": 1.469132244E12,
+      "result": "SUCCESS",
+      "orderId": "14CFA2S2DPHW4",
+      "employeeId": "1FJPWTZFRJTVJ",
+      "cardTransaction": {
+        "cardType": "DISCOVER",
+        "entryType": "SWIPED",
+        "last4": "6668",
+        "type": "AUTH",
+        "authCode": "OK8198",
+        "referenceId": "620300027133",
+        "state": "CLOSED"
+      },
+      "order": {
+        "id": "14CFA2S2DPHW4",
+        "currency": "USD",
+        "employeeId": "1FJPWTZFRJTVJ",
+        "total": 500,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": false,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469132241E12,
+        "clientCreatedTime": 1.469132241E12,
+        "modifiedTime": 1.469132244E12,
+        "deviceId": "51615133-401f-4620-93a6-29ab98caf2ff"
+      },
+      "tender": {
+        "id": "1DCPZSP6GDXP8",
+        "editable": false,
+        "labelKey": "com.clover.tender.credit_card",
+        "label": "Credit Card",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "5C76JDHK0J27P",
+      "amount": 330,
+      "createdTime": 1.469131457E12,
+      "clientCreatedTime": 1.469131457E12,
+      "modifiedTime": 1.469162171E12,
+      "result": "SUCCESS",
+      "orderId": "XZZZTN837WT56",
+      "employeeId": "D3WBSX1RE88Y2",
+      "cardTransaction": {
+        "cardType": "DISCOVER",
+        "entryType": "EMV_CONTACTLESS",
+        "last4": "0677",
+        "type": "PREAUTH",
+        "authCode": "877672",
+        "referenceId": "620300027130",
+        "state": "CLOSED"
+      },
+      "order": {
+        "id": "XZZZTN837WT56",
+        "currency": "USD",
+        "employeeId": "D3WBSX1RE88Y2",
+        "total": 330,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469131456E12,
+        "clientCreatedTime": 1.469131456E12,
+        "modifiedTime": 1.469162172E12,
+        "deviceId": "139c9199-7582-4663-85a5-465b250d0079"
+      },
+      "tender": {
+        "id": "1DCPZSP6GDXP8",
+        "editable": false,
+        "labelKey": "com.clover.tender.credit_card",
+        "label": "Credit Card",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }, {
+    "payments": [{
+      "id": "JCBSQXV1QPNPR",
+      "amount": 601,
+      "createdTime": 1.4690679E12,
+      "clientCreatedTime": 1.4690679E12,
+      "modifiedTime": 1.469067901E12,
+      "result": "SUCCESS",
+      "orderId": "4N5V30A3YXDMT",
+      "employeeId": "QZ5KBJCZBVGZA",
+      "cardTransaction": {
+        "cardType": "MC",
+        "entryType": "EMV_CONTACTLESS",
+        "last4": "4111",
+        "type": "PREAUTH",
+        "authCode": "200686",
+        "referenceId": "620300026982",
+        "state": "CLOSED"
+      },
+      "order": {
+        "id": "4N5V30A3YXDMT",
+        "currency": "USD",
+        "employeeId": "QZ5KBJCZBVGZA",
+        "total": 601,
+        "taxRemoved": false,
+        "isVat": false,
+        "state": "locked",
+        "manualTransaction": true,
+        "groupLineItems": true,
+        "testMode": false,
+        "createdTime": 1.469067898E12,
+        "clientCreatedTime": 1.469067898E12,
+        "modifiedTime": 1.469067902E12,
+        "deviceId": "ce11f986-b754-4cf8-ad08-3f2496ce2cbb"
+      },
+      "tender": {
+        "id": "1DCPZSP6GDXP8",
+        "editable": false,
+        "labelKey": "com.clover.tender.credit_card",
+        "label": "Credit Card",
+        "opensCashDrawer": true,
+        "enabled": true,
+        "visible": true
+      }
+    }]
+  }]
+}
