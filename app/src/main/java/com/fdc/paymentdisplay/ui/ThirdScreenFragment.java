@@ -1,6 +1,7 @@
 package com.fdc.paymentdisplay.ui;
 
 import com.fdc.paymentdisplay.R;
+import com.fdc.paymentdisplay.constant.Constants;
 import com.fdc.paymentdisplay.modal.PaymentRowDetails;
 import com.fdc.paymentdisplay.modal.UserInfo;
 
@@ -31,12 +32,11 @@ public class ThirdScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.screenthird, container, false);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            userInfo = (UserInfo) bundle.get("formInfo");
-            paymentRowDetails = (PaymentRowDetails) bundle.get("transactionInfo");
+            userInfo = (UserInfo) bundle.get(Constants.USERINFO);
+            paymentRowDetails = (PaymentRowDetails) bundle.get(Constants.TRANSACTIONINFO);
         }
         initialize();
         bindData();

@@ -15,17 +15,15 @@ public class FragmentHoldingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_holding);
-        addfragment();
+        addFragment();
     }
 
-    private void addfragment() {
+    private void addFragment() {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         FirstScreenFragment firstScreenFragment = FirstScreenFragment.newInstance(null);
-        //SecondScreenFragment secondScreenFragment = SecondScreenFragment.newInstance(null);
         fragmentTransaction.replace(R.id.fragment_container, firstScreenFragment);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

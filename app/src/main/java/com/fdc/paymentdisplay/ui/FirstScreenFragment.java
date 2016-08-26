@@ -1,6 +1,7 @@
 package com.fdc.paymentdisplay.ui;
 
 import com.fdc.paymentdisplay.R;
+import com.fdc.paymentdisplay.constant.Constants;
 import com.fdc.paymentdisplay.modal.OrderModal;
 import com.fdc.paymentdisplay.modal.UserInfo;
 import com.fdc.paymentdisplay.util.Utility;
@@ -18,12 +19,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by mgupta4 on 8/25/2016.
  */
 public class FirstScreenFragment extends Fragment implements View.OnClickListener {
+    private final String HTTP = "https://api-int.payeezy.com/v1/clovergo/refdata";
+    private final String JSONFILE = "paymentdetails.json";
     private View view ;
     private EditText firstName;
     private EditText lastName;
@@ -38,13 +51,11 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.screenfirst, container, false);
         return view;
     }
 
     public static FirstScreenFragment newInstance(Bundle bundle) {
-
         FirstScreenFragment fragment = new FirstScreenFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -77,7 +88,7 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
 
             case R.id.nextbutton:
                 FetchLocalJson fetchLocalJson = new FetchLocalJson();
-                fetchLocalJson.execute("paymentdetails.json");
+                fetchLocalJson.execute(JSONFILE);
         }
     }
 
@@ -90,7 +101,9 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
             String addressValue =  address.getText().toString();
             String favBookValue =  favBook.getText().toString();
             userInfo = new UserInfo(firstNameValue , lastNameValue , phoneNumberValue , addressValue , favBookValue);
-            navigateFurther();
+            PostLocalJson postLocalJson = new PostLocalJson();
+            postLocalJson.execute(HTTP);
+
         }else{
             Toast.makeText(getActivity(), "Please fill details correctly" , Toast.LENGTH_LONG).show();
         }
@@ -101,8 +114,8 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
         FragmentManager fragManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragManager.beginTransaction();
         Bundle userInfoBundle = new Bundle();
-        userInfoBundle.putSerializable("formInfo" , userInfo);
-        userInfoBundle.putSerializable("orders" , orderModal);
+        userInfoBundle.putSerializable(Constants.USERINFO, userInfo);
+        userInfoBundle.putSerializable(Constants.ORDERS , orderModal);
         SecondScreenFragment secondScreenFragment = SecondScreenFragment.newInstance(userInfoBundle);
         fragmentTransaction.replace(R.id.fragment_container , secondScreenFragment);
         fragmentTransaction.addToBackStack(SecondScreenFragment.class.getSimpleName());
@@ -115,7 +128,7 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
         @Override
         protected void onPreExecute() {
             progress = new ProgressDialog(getActivity());
-            progress.setMessage("Loading");
+            progress.setMessage("Loading...");
             progress.show();
             super.onPreExecute();
         }
@@ -140,32 +153,72 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
     }
 
 
-    private class PostLocalJson extends AsyncTask<String, Void, Serializable> {
+    private class PostLocalJson extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
             progress = new ProgressDialog(getActivity());
-            progress.setMessage("Loading");
+            progress.setMessage("Posting Details...");
             progress.show();
             super.onPreExecute();
         }
 
         @Override
-        protected Serializable doInBackground(String... params) {
+        protected String doInBackground(String... params) {
+            StringBuilder sb = new StringBuilder();
 
-            String response = Utility.loadJSONFromAsset(getActivity(), params[0]);
-            orderModal = (OrderModal) Utility.getObjectFromJSONString(response, OrderModal.class);
+            HttpURLConnection urlConnection=null;
+            try {
+                URL url = new URL(params[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setUseCaches(false);
+                urlConnection.setConnectTimeout(10000);
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setRequestProperty("Content-Type","application/json");
+                urlConnection.connect();
 
-            return orderModal;
+                //Create JSONObject here
+                JSONObject jsonParam = new JSONObject();
+                jsonParam.put(Constants.ORDERS, orderModal);
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write(jsonParam.toString());
+                out.close();
+
+                int HttpResult =urlConnection.getResponseCode();
+                if(HttpResult ==HttpURLConnection.HTTP_OK){
+                    sb.append("Success");
+                    return sb.toString();
+                }else{
+                    System.out.println(urlConnection.getResponseMessage());
+                    sb.append( urlConnection.getResponseMessage());
+                    return sb.toString();
+                }
+            } catch (MalformedURLException e) {
+
+                e.printStackTrace();
+            }
+            catch (IOException e) {
+
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }finally{
+                if(urlConnection!=null)
+                    urlConnection.disconnect();
+            }
+
+            return sb.toString();
         }
 
         @Override
-        protected void onPostExecute(Serializable orderModal) {
+        protected void onPostExecute(String message) {
             if (progress != null && progress.isShowing()) {
                 progress.dismiss();
             }
-            validateForm();
-            super.onPostExecute(orderModal);
+            navigateFurther();
+            super.onPostExecute(message);
         }
     }
 

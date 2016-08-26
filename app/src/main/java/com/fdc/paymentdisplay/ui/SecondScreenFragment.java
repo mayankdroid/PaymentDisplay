@@ -3,6 +3,7 @@ package com.fdc.paymentdisplay.ui;
 import com.fdc.paymentdisplay.PaymentDetailsInterface;
 import com.fdc.paymentdisplay.R;
 import com.fdc.paymentdisplay.adaptor.PaymentCustomAdaptor;
+import com.fdc.paymentdisplay.constant.Constants;
 import com.fdc.paymentdisplay.modal.OrderModal;
 import com.fdc.paymentdisplay.modal.PaymentDate;
 import com.fdc.paymentdisplay.modal.PaymentRowDetails;
@@ -45,14 +46,12 @@ public class SecondScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.screensecond, container, false);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            userInfo = (UserInfo) bundle.getSerializable("formInfo");
-            orderModal = (OrderModal) bundle.getSerializable("orders");
+            userInfo = (UserInfo) bundle.getSerializable(Constants.USERINFO);
+            orderModal = (OrderModal) bundle.getSerializable(Constants.ORDERS);
         }
-
         initializeViews();
         if (orderModal != null) {
             populatePaymentDetails();
@@ -71,8 +70,8 @@ public class SecondScreenFragment extends Fragment {
                 PaymentDetailsInterface paymentDetailsInterface = paymentDetailsInterfaceList.get(position);
                 if (paymentDetailsInterface instanceof PaymentRowDetails) {
                     Bundle userInfoBundle = new Bundle();
-                    userInfoBundle.putSerializable("formInfo", userInfo);
-                    userInfoBundle.putSerializable("transactionInfo", (PaymentRowDetails) paymentDetailsInterface);
+                    userInfoBundle.putSerializable(Constants.USERINFO, userInfo);
+                    userInfoBundle.putSerializable(Constants.TRANSACTIONINFO, (PaymentRowDetails) paymentDetailsInterface);
                     ThirdScreenFragment thirdScreenFragment = ThirdScreenFragment.newInstance(userInfoBundle);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, thirdScreenFragment).addToBackStack(ThirdScreenFragment.class.getSimpleName()).commit();
                 }
@@ -115,7 +114,7 @@ public class SecondScreenFragment extends Fragment {
                         paymentDetailsInterfaceList.add(new PaymentDate(headerDate));
                         List<OrderModal.Orders.Payment> subPayments = datePaymentMap.get(headerDate);
                         for (OrderModal.Orders.Payment payment : subPayments) {
-                            String createdDateforDetails = Utility.getDateByFormat(payment.createdTime, "MMMM dd,yyyy");
+                            String createdDateforDetails = Utility.getDateByFormat(payment.createdTime, Constants.DETAIL_DATEFORMATTER);
                             if (payment.cardTransaction != null) {
                                 if (payment.order != null && payment.tender != null) {
                                     paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.cardTransaction.cardType, String.valueOf(payment.amount), payment.id, payment.employeeId, payment.order.currency, String.valueOf(payment.order.total), createdDateforDetails, payment.tender.label, payment.cardTransaction.last4));

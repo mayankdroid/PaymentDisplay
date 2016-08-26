@@ -1,18 +1,17 @@
 package com.fdc.paymentdisplay.adaptor;
 
-import com.fdc.paymentdisplay.PaymentDetailsInterface;
-import com.fdc.paymentdisplay.R;
-import com.fdc.paymentdisplay.constant.Constants;
-import com.fdc.paymentdisplay.modal.OrderModal;
-import com.fdc.paymentdisplay.modal.PaymentDate;
-import com.fdc.paymentdisplay.modal.PaymentRowDetails;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.fdc.paymentdisplay.PaymentDetailsInterface;
+import com.fdc.paymentdisplay.R;
+import com.fdc.paymentdisplay.constant.Constants;
+import com.fdc.paymentdisplay.modal.PaymentDate;
+import com.fdc.paymentdisplay.modal.PaymentRowDetails;
 
 import java.util.List;
 
@@ -119,7 +118,6 @@ public class PaymentCustomAdaptor extends BaseAdapter {
         private TextView paymentDate;
         private TextView paymentType;
         private TextView paymentAmount;
-
 
     }
 
