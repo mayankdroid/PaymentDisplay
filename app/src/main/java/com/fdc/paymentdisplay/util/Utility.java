@@ -2,6 +2,7 @@ package com.fdc.paymentdisplay.util;
 
 import com.fdc.paymentdisplay.constant.Constants;
 import com.fdc.paymentdisplay.modal.OrderModal;
+import com.fdc.paymentdisplay.modal.Payment;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -83,16 +84,16 @@ public class Utility {
         return false;
     }
 
-    public static Map<String, List<OrderModal.Orders.Payment>> groupPayments(ArrayList<OrderModal.Orders.Payment> list){
-        TreeMap<String, List<OrderModal.Orders.Payment>> map = new TreeMap<String, List<OrderModal.Orders.Payment>>(Collections.reverseOrder());
+    public static Map<String, List<Payment>> groupPayments(ArrayList<Payment> list){
+        TreeMap<String, List<Payment>> map = new TreeMap<String, List<Payment>>(Collections.reverseOrder());
         for(int i=0;i<list.size();i++){
-            OrderModal.Orders.Payment p = (OrderModal.Orders.Payment) list.get(i);
+            Payment p = (Payment) list.get(i);
             String key = getDateByFormat(p.createdTime, Constants.HEADER_DATEFORMATTER);
             if(map.containsKey(key)){
-                ArrayList<OrderModal.Orders.Payment> old = (ArrayList<OrderModal.Orders.Payment>)map.get(key);
+                ArrayList<Payment> old = (ArrayList<Payment>)map.get(key);
                 old.add(p);
             }else{
-                ArrayList<OrderModal.Orders.Payment> n = new ArrayList<OrderModal.Orders.Payment>();
+                ArrayList<Payment> n = new ArrayList<Payment>();
                 n.add(p);
                 map.put(key, n);
             }

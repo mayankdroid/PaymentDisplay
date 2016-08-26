@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.fdc.paymentdisplay.R;
 import com.fdc.paymentdisplay.constant.Constants;
-import com.fdc.paymentdisplay.modal.OrderModal;
+import com.fdc.paymentdisplay.modal.Payment;
 import com.fdc.paymentdisplay.modal.UserInfo;
 import com.fdc.paymentdisplay.util.Utility;
 
@@ -28,7 +28,7 @@ public class ThirdScreenFragment extends Fragment {
     private TextView transactionTime;
     private TextView paymentType;
     private UserInfo userInfo;
-    private OrderModal.Orders.Payment payment;
+    private Payment payment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +37,7 @@ public class ThirdScreenFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             userInfo = (UserInfo) bundle.get(Constants.USERINFO);
-            payment = (OrderModal.Orders.Payment) bundle.get(Constants.TRANSACTIONINFO);
+            payment = (Payment) bundle.get(Constants.TRANSACTIONINFO);
         }
         initialize();
         bindData();

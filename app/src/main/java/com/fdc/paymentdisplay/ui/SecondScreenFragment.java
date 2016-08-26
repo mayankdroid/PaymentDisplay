@@ -14,6 +14,8 @@ import com.fdc.paymentdisplay.R;
 import com.fdc.paymentdisplay.adaptor.PaymentCustomAdaptor;
 import com.fdc.paymentdisplay.constant.Constants;
 import com.fdc.paymentdisplay.modal.OrderModal;
+import com.fdc.paymentdisplay.modal.Orders;
+import com.fdc.paymentdisplay.modal.Payment;
 import com.fdc.paymentdisplay.modal.PaymentDate;
 import com.fdc.paymentdisplay.modal.UserInfo;
 import com.fdc.paymentdisplay.util.Utility;
@@ -61,7 +63,7 @@ public class SecondScreenFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 PaymentDetailsInterface paymentDetailsInterface = paymentDetailsInterfaceList.get(position);
-                if (paymentDetailsInterface instanceof OrderModal.Orders.Payment) {
+                if (paymentDetailsInterface instanceof Payment) {
                     Bundle userInfoBundle = new Bundle();
                     userInfoBundle.putSerializable(Constants.USERINFO, userInfo);
                     userInfoBundle.putSerializable(Constants.TRANSACTIONINFO, ((Serializable) paymentDetailsInterface));
@@ -91,16 +93,16 @@ public class SecondScreenFragment extends Fragment {
 
 
     private void populatePaymentDetails() {
-        Map<String, List<OrderModal.Orders.Payment>> datePaymentMap;
-        List<OrderModal.Orders.Payment> payments = new ArrayList<>();
+        Map<String, List<Payment>> datePaymentMap;
+        List<Payment> payments = new ArrayList<>();
         try {
             if (orderModal != null) {
 
-                for (OrderModal.Orders orderObj : ((OrderModal) orderModal).orders) {
+                for (Orders orderObj : ((OrderModal) orderModal).orders) {
                     payments.addAll(orderObj.payments);
                 }
                 if (payments != null) {
-                    datePaymentMap = Utility.groupPayments((ArrayList<OrderModal.Orders.Payment>) payments);
+                    datePaymentMap = Utility.groupPayments((ArrayList<Payment>) payments);
                     paymentDetailsInterfaceList.clear();
                     for (String headerDate : datePaymentMap.keySet()) {
                         //creating the header in the adapter list
