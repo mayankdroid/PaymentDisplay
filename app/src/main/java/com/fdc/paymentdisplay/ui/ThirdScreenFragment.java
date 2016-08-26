@@ -14,17 +14,18 @@ import android.widget.TextView;
 /**
  * Created by mgupta4 on 8/25/2016.
  */
-public class ThirdScreenFragment extends Fragment{
+public class ThirdScreenFragment extends Fragment {
 
-    private View view ;
-    private TextView userName ;
+    private View view;
+    private TextView userName;
     private TextView useraddress;
-    private TextView favBook ;
+    private TextView favBook;
     private TextView transactionId;
     private TextView employeeId;
     private TextView totalAmount;
     private TextView transactionTime;
-    private UserInfo userInfo ;
+    private TextView paymentType;
+    private UserInfo userInfo;
     private PaymentRowDetails paymentRowDetails;
 
     @Override
@@ -33,33 +34,39 @@ public class ThirdScreenFragment extends Fragment{
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.screenthird, container, false);
         Bundle bundle = getArguments();
-        if(bundle!=null){
+        if (bundle != null) {
             userInfo = (UserInfo) bundle.get("formInfo");
-            paymentRowDetails = (PaymentRowDetails)bundle.get("transactionInfo");
+            paymentRowDetails = (PaymentRowDetails) bundle.get("transactionInfo");
         }
         initialize();
         bindData();
-        return view ;
+        return view;
     }
 
     private void bindData() {
         userName.setText("Hello " + userInfo.getFirstName() + " " + userInfo.getLastName());
         useraddress.setText(userInfo.getAddress() + " | M : " + userInfo.getPhoneNumber());
-        favBook.setText("favorate book : " +  userInfo.getFavBook());
+        favBook.setText("favorate book : " + userInfo.getFavBook());
         transactionId.setText(paymentRowDetails.getTransactionId());
         employeeId.setText(paymentRowDetails.getEmployeeId());
         totalAmount.setText(paymentRowDetails.getCurrency() + " " + paymentRowDetails.getTotalAmount());
         transactionTime.setText(paymentRowDetails.getTimeOfTransaction());
+        if (paymentRowDetails.getPaymentMode().contains("Card"))
+            paymentType.setText(paymentRowDetails.getPaymentType() + " " + paymentRowDetails.getCardNumber());
+        else {
+            paymentType.setText(paymentRowDetails.getPaymentMode());
+        }
     }
 
     private void initialize() {
-        userName = (TextView)view.findViewById(R.id.greetuserlbl);
-        useraddress = (TextView)view.findViewById(R.id.addressphonenumberlbl);
-        favBook = (TextView)view.findViewById(R.id.favbook);
-        transactionId = (TextView)view.findViewById(R.id.transactionidvalue);
-        employeeId = (TextView)view.findViewById(R.id.employeeidvalue);
-        totalAmount = (TextView)view.findViewById(R.id.totalamountvalue);
-        transactionTime = (TextView)view.findViewById(R.id.createdtimeidvalue);
+        userName = (TextView) view.findViewById(R.id.greetuserlbl);
+        useraddress = (TextView) view.findViewById(R.id.addressphonenumberlbl);
+        favBook = (TextView) view.findViewById(R.id.favbook);
+        transactionId = (TextView) view.findViewById(R.id.transactionidvalue);
+        employeeId = (TextView) view.findViewById(R.id.employeeidvalue);
+        totalAmount = (TextView) view.findViewById(R.id.totalamountvalue);
+        transactionTime = (TextView) view.findViewById(R.id.createdtimeidvalue);
+        paymentType = (TextView) view.findViewById(R.id.paymenttypevalue);
     }
 
     public static ThirdScreenFragment newInstance(Bundle bundle) {

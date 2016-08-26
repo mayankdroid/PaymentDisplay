@@ -70,15 +70,6 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
 
             case R.id.nextbutton:
                 validateForm();
-                FragmentManager fragManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragManager.beginTransaction();
-                Bundle userInfoBundle = new Bundle();
-                //UserInfo userInfo = new UserInfo("first" ,"first" , "first" , "first" ,"first");
-                userInfoBundle.putSerializable("formInfo" , userInfo);
-                SecondScreenFragment secondScreenFragment = SecondScreenFragment.newInstance(userInfoBundle);
-                fragmentTransaction.replace(R.id.fragment_container , secondScreenFragment);
-                fragmentTransaction.addToBackStack(SecondScreenFragment.class.getSimpleName());
-                fragmentTransaction.commit();
         }
     }
 
@@ -91,12 +82,23 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
             String addressValue =  address.getText().toString();
             String favBookValue =  favBook.getText().toString();
             userInfo = new UserInfo(firstNameValue , lastNameValue , phoneNumberValue , addressValue , favBookValue);
+            navigateFurther();
         }else{
             Toast.makeText(getActivity(), "Please fill details correctly" , Toast.LENGTH_LONG).show();
         }
 
     }
 
+    private void navigateFurther() {
+        FragmentManager fragManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragManager.beginTransaction();
+        Bundle userInfoBundle = new Bundle();
+        userInfoBundle.putSerializable("formInfo" , userInfo);
+        SecondScreenFragment secondScreenFragment = SecondScreenFragment.newInstance(userInfoBundle);
+        fragmentTransaction.replace(R.id.fragment_container , secondScreenFragment);
+        fragmentTransaction.addToBackStack(SecondScreenFragment.class.getSimpleName());
+        fragmentTransaction.commit();
+    }
 
 
 }

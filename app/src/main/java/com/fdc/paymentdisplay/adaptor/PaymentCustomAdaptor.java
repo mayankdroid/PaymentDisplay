@@ -27,7 +27,7 @@ public class PaymentCustomAdaptor extends BaseAdapter {
 
     public PaymentCustomAdaptor(Context context, List<PaymentDetailsInterface> paymentDetailsInterfaces) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.mPaymentDetailsInterfaceList = paymentDetailsInterfaces ;
+        this.mPaymentDetailsInterfaceList = paymentDetailsInterfaces;
     }
 
     @Override
@@ -98,8 +98,12 @@ public class PaymentCustomAdaptor extends BaseAdapter {
                 ViewHolder detailRowHolder = (ViewHolder) view.getTag();
                 String paymentType = ((PaymentRowDetails) paymentDetailsInterface).getPaymentType();
                 String paymentAmount = ((PaymentRowDetails) paymentDetailsInterface).getPaymentAmount();
-                detailRowHolder.paymentType.setText(paymentType);
-                detailRowHolder.paymentAmount.setText(paymentAmount);
+                if (((PaymentRowDetails) paymentDetailsInterface).getPaymentMode().contains("Card")) {
+                    detailRowHolder.paymentType.setText("Card-" + paymentType);
+                } else {
+                    detailRowHolder.paymentType.setText(paymentType);
+                }
+                detailRowHolder.paymentAmount.setText("$ " + paymentAmount);
 
                 break;
 

@@ -1,5 +1,6 @@
 package com.fdc.paymentdisplay.util;
 
+import com.fdc.paymentdisplay.modal.OrderModal;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -11,7 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by mgupta4 on 8/25/2016.
@@ -73,5 +79,22 @@ public class Utility {
             return android.util.Patterns.PHONE.matcher(((EditText) view).getText()).matches();
         }
         return false;
+    }
+
+    public static Map<String, List<OrderModal.Orders.Payment>> groupPayments(ArrayList<OrderModal.Orders.Payment> list){
+        Map<String, List<OrderModal.Orders.Payment>> map = new TreeMap<String, List<OrderModal.Orders.Payment>>();
+        for(int i=0;i<list.size();i++){
+            OrderModal.Orders.Payment p = (OrderModal.Orders.Payment) list.get(i);
+            String key = getDateByFormat(p.createdTime, "yyyy-MM-dd");
+            if(map.containsKey(key)){
+                ArrayList<OrderModal.Orders.Payment> old = (ArrayList<OrderModal.Orders.Payment>)map.get(key);
+                old.add(p);
+            }else{
+                ArrayList<OrderModal.Orders.Payment> n = new ArrayList<OrderModal.Orders.Payment>();
+                n.add(p);
+                map.put(key, n);
+            }
+        }
+        return map;
     }
     }

@@ -15,9 +15,11 @@ public class PaymentRowDetails implements PaymentDetailsInterface , Serializable
     private String employeeId ;
     private String currency ;
     private String totalAmount;
+    private String paymentMode ;
+    private String cardNumber ;
     private String timeOfTransaction;
 
-    public PaymentRowDetails(String paymentType, String paymentAmount, String transactionId, String employeeId, String currency, String totalAmount, String timeOfTransaction) {
+    public PaymentRowDetails(String paymentType, String paymentAmount, String transactionId, String employeeId, String currency, String totalAmount, String timeOfTransaction , String paymentMode , String cardNumber) {
         this.paymentType = paymentType;
         this.paymentAmount = paymentAmount;
         this.transactionId = transactionId;
@@ -25,6 +27,8 @@ public class PaymentRowDetails implements PaymentDetailsInterface , Serializable
         this.currency = currency;
         this.totalAmount = totalAmount;
         this.timeOfTransaction = timeOfTransaction;
+        this.paymentMode = paymentMode;
+        this.cardNumber =cardNumber;
     }
 
     public String getTransactionId() {
@@ -53,5 +57,14 @@ public class PaymentRowDetails implements PaymentDetailsInterface , Serializable
 
     public String getPaymentAmount() {
         return paymentAmount;
+    }
+
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
     }
 }

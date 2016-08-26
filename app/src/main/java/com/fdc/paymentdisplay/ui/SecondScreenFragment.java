@@ -22,21 +22,24 @@ import android.widget.ListView;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * Created by mgupta4 on 8/25/2016.
  */
 public class SecondScreenFragment extends Fragment {
-    private View view ;
+    private View view;
     private ListView listview;
     private PaymentCustomAdaptor mPaymentCustomAdaptor;
     private OrderModal order;
     private List<PaymentDetailsInterface> paymentDetailsInterfaceList = new ArrayList<PaymentDetailsInterface>();
-    private ProgressDialog progress ;
-    private UserInfo userInfo ;
+    private ProgressDialog progress;
+    private UserInfo userInfo;
 
 
     @Override
@@ -45,14 +48,14 @@ public class SecondScreenFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.screensecond, container, false);
         Bundle bundle = getArguments();
-        if(bundle !=null){
+        if (bundle != null) {
             userInfo = (UserInfo) bundle.getSerializable("formInfo");
         }
 
         initializeViews();
         FetchLocalJson fetchLocalJson = new FetchLocalJson();
         fetchLocalJson.execute("paymentdetails.json");
-        return view ;
+        return view;
     }
 
     private void initializeAdapters() {
@@ -63,21 +66,20 @@ public class SecondScreenFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 PaymentDetailsInterface paymentDetailsInterface = paymentDetailsInterfaceList.get(position);
-                if(paymentDetailsInterface instanceof PaymentRowDetails){
+                if (paymentDetailsInterface instanceof PaymentRowDetails) {
                     Bundle userInfoBundle = new Bundle();
-                    userInfoBundle.putSerializable("formInfo" , userInfo);
-                    userInfoBundle.putSerializable("transactionInfo" , (PaymentRowDetails)paymentDetailsInterface);
+                    userInfoBundle.putSerializable("formInfo", userInfo);
+                    userInfoBundle.putSerializable("transactionInfo", (PaymentRowDetails) paymentDetailsInterface);
                     ThirdScreenFragment thirdScreenFragment = ThirdScreenFragment.newInstance(userInfoBundle);
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container , thirdScreenFragment ).addToBackStack(ThirdScreenFragment.class.getSimpleName()).commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, thirdScreenFragment).addToBackStack(ThirdScreenFragment.class.getSimpleName()).commit();
                 }
             }
         });
     }
 
 
-
     private void initializeViews() {
-        listview = (ListView)view.findViewById(R.id.payments_listview);
+        listview = (ListView) view.findViewById(R.id.payments_listview);
     }
 
     public static SecondScreenFragment newInstance(Bundle bundle) {
@@ -116,7 +118,7 @@ public class SecondScreenFragment extends Fragment {
         protected void onPostExecute(Serializable orderModal) {
             populatePaymentDetails(orderModal);
             initializeAdapters();
-            if(progress!=null && progress.isShowing()){
+            if (progress != null && progress.isShowing()) {
                 progress.dismiss();
             }
             super.onPostExecute(order);
@@ -124,41 +126,47 @@ public class SecondScreenFragment extends Fragment {
     }
 
     private void populatePaymentDetails(Serializable orderModal) {
-        Set<Long> key = new HashSet<Long>();
-
+        Map<String, List<OrderModal.Orders.Payment>> datePaymentMap ;
+        List<OrderModal.Orders.Payment> payments = new ArrayList<>();
         try {
-            if(orderModal!=null){
+            if (orderModal != null) {
 
-                OrderModal ordermodals = (OrderModal) orderModal ;
-                List<OrderModal.Orders.Payment> payments = new ArrayList<OrderModal.Orders.Payment>() ;
-                for(OrderModal.Orders orderObj : ordermodals.orders){
-                    payments.addAll(orderObj.payments) ;
+                for (OrderModal.Orders orderObj : ((OrderModal) orderModal).orders) {
+                    payments.addAll(orderObj.payments);
                 }
 
-                if(payments!=null){
-                    for(OrderModal.Orders.Payment payment :payments){
-                        key.add(payment.createdTime);
-                    }
-                    List<Long> keyList = new ArrayList<Long>(key);
-                    Collections.sort(keyList);
+                if (payments != null) {
+
+                /*    Collections.sort(payments, new Comparator<OrderModal.Orders.Payment>() {
+                        public int compare(OrderModal.Orders.Payment p1, OrderModal.Orders.Payment p2) {
+
+                            if (p1.createdTime == p2.createdTime){
+                                return 0;
+                            }else if (p1.createdTime > p2.createdTime) {
+                                return 1;
+                            } else {
+                                return -1;
+                            }
+                        }
+                    });*/
+                    datePaymentMap = Utility.groupPayments((ArrayList<OrderModal.Orders.Payment>)payments);
+
                     paymentDetailsInterfaceList.clear();
-                    for(Long date :keyList){
-                        String paymentcreatedDate = Utility.getDateByFormat(date,"yyyy-MM-dd");
-                        paymentDetailsInterfaceList.add(new PaymentDate(paymentcreatedDate));
-                        for (OrderModal.Orders.Payment payment : payments) {
-                            if (date==payment.createdTime) {
-                                String createdDateforDetails = Utility.getDateByFormat(date,"MMMM dd,yyyy");
-                                if(payment.cardTransaction!=null){
-                                    paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.cardTransaction.cardType , String.valueOf(payment.amount) , payment.id ,payment.employeeId,payment.order.currency,String.valueOf(payment.order.total),createdDateforDetails));
-                                }else{
-                                    paymentDetailsInterfaceList.add(new PaymentRowDetails("Info NA" , String.valueOf(payment.amount) , payment.id ,payment.employeeId,payment.order.currency,String.valueOf(payment.order.total),createdDateforDetails));
-                                }
+                    for (String headerDate : datePaymentMap.keySet()) {
+                        paymentDetailsInterfaceList.add(new PaymentDate(headerDate));
+                        List<OrderModal.Orders.Payment> subPayments = datePaymentMap.get(headerDate);
+                        for(OrderModal.Orders.Payment payment : subPayments){
+                            String createdDateforDetails = Utility.getDateByFormat(payment.createdTime, "MMMM dd,yyyy");
+                            if (payment.cardTransaction != null ) {
+                                paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.cardTransaction.cardType, String.valueOf(payment.amount), payment.id, payment.employeeId, payment.order.currency, String.valueOf(payment.order.total), createdDateforDetails , payment.tender.label , payment.cardTransaction.last4));
+                            } else {
+                                paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.tender.label , String.valueOf(payment.amount), payment.id, payment.employeeId, payment.order.currency, String.valueOf(payment.order.total), createdDateforDetails,payment.tender.label , "Info NA"));
                             }
                         }
                     }
                 }
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 

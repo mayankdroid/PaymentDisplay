@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/colorPrimary">
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@android:color/white"
+    android:gravity="center_vertical">
 
     <TextView
-            android:id="@+id/paymenttype"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="16dp"
-            android:text="CASH"
-            android:textColor="@android:color/white"/>
+        android:id="@+id/paymenttype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:gravity="center_vertical"
+        android:text="CASH"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+       />
 
     <TextView
-            android:id="@+id/paymentamount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
-            android:text="$ 2.31"
-            android:textColor="@android:color/white"/>
+        android:id="@+id/paymentamount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:gravity="center_vertical"
+        android:text="$ 2.31"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        />
 
 </RelativeLayout>
