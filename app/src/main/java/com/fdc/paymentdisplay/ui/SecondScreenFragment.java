@@ -98,7 +98,7 @@ public class SecondScreenFragment extends Fragment {
         try {
             if (orderModal != null) {
 
-                for (Orders orderObj : ((OrderModal) orderModal).orders) {
+                for (Orders orderObj : (orderModal).orders) {
                     payments.addAll(orderObj.payments);
                 }
                 if (payments != null) {
