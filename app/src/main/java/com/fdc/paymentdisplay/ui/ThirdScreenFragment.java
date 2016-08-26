@@ -46,7 +46,7 @@ public class ThirdScreenFragment extends Fragment {
     private void bindData() {
         userName.setText("Hello " + userInfo.getFirstName() + " " + userInfo.getLastName());
         useraddress.setText(userInfo.getAddress() + " | M : " + userInfo.getPhoneNumber());
-        favBook.setText("favorate book : " + userInfo.getFavBook());
+        favBook.setText("Favorite  Book : " + userInfo.getFavBook());
         transactionId.setText(paymentRowDetails.getTransactionId());
         employeeId.setText(paymentRowDetails.getEmployeeId());
         totalAmount.setText(paymentRowDetails.getCurrency() + " " + paymentRowDetails.getTotalAmount());

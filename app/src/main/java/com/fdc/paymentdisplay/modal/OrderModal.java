@@ -7,19 +7,16 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 import com.fdc.paymentdisplay.util.Struct;
 
-@Struct
 public class OrderModal implements Serializable{
 
     @SerializedName("orders")
     public List<Orders> orders ;
 
-    @Struct
     public static class Orders {
 
         @SerializedName("payments")
         public List<Payment> payments;
 
-        @Struct
         public static class Payment {
             @SerializedName("id")
             public String id;
@@ -44,7 +41,6 @@ public class OrderModal implements Serializable{
             @SerializedName("tender")
             public Tender tender;
 
-            @Struct
             public static class Order_ {
                 @SerializedName("id")
                 public String id;
@@ -76,7 +72,6 @@ public class OrderModal implements Serializable{
                 public String deviceId;
             }
 
-            @Struct
             public static class CardTransaction {
                 @SerializedName("cardType")
                 public String cardType;
@@ -95,7 +90,6 @@ public class OrderModal implements Serializable{
             }
 
 
-            @Struct
             public static class Tender {
                 @SerializedName("id")
                 public String id;

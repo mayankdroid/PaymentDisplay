@@ -36,7 +36,7 @@ public class SecondScreenFragment extends Fragment {
     private View view;
     private ListView listview;
     private PaymentCustomAdaptor mPaymentCustomAdaptor;
-    private OrderModal order;
+    private OrderModal orderModal;
     private List<PaymentDetailsInterface> paymentDetailsInterfaceList = new ArrayList<PaymentDetailsInterface>();
     private ProgressDialog progress;
     private UserInfo userInfo;
@@ -50,11 +50,14 @@ public class SecondScreenFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             userInfo = (UserInfo) bundle.getSerializable("formInfo");
+            orderModal = (OrderModal) bundle.getSerializable("orders");
         }
 
         initializeViews();
-        FetchLocalJson fetchLocalJson = new FetchLocalJson();
-        fetchLocalJson.execute("paymentdetails.json");
+        if (orderModal != null) {
+            populatePaymentDetails();
+            initializeAdapters();
+        }
         return view;
     }
 
@@ -95,37 +98,7 @@ public class SecondScreenFragment extends Fragment {
     }
 
 
-    private class FetchLocalJson extends AsyncTask<String, Void, Serializable> {
-
-        @Override
-        protected void onPreExecute() {
-            progress = new ProgressDialog(getActivity());
-            progress.setMessage("Loading");
-            progress.show();
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Serializable doInBackground(String... params) {
-
-            String response = Utility.loadJSONFromAsset(getActivity(), params[0]);
-            OrderModal order = (OrderModal) Utility.getObjectFromJSONString(response, OrderModal.class);
-
-            return order;
-        }
-
-        @Override
-        protected void onPostExecute(Serializable orderModal) {
-            populatePaymentDetails(orderModal);
-            initializeAdapters();
-            if (progress != null && progress.isShowing()) {
-                progress.dismiss();
-            }
-            super.onPostExecute(order);
-        }
-    }
-
-    private void populatePaymentDetails(Serializable orderModal) {
+    private void populatePaymentDetails() {
         Map<String, List<OrderModal.Orders.Payment>> datePaymentMap;
         List<OrderModal.Orders.Payment> payments = new ArrayList<>();
         try {
@@ -149,7 +122,6 @@ public class SecondScreenFragment extends Fragment {
                                 } else {
                                     paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.cardTransaction.cardType, String.valueOf(payment.amount), payment.id, payment.employeeId, "Info NA", "Info NA", createdDateforDetails, "Info NA", payment.cardTransaction.last4));
                                 }
-
                             } else {
                                 paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.tender.label, String.valueOf(payment.amount), payment.id, payment.employeeId, payment.order.currency, String.valueOf(payment.order.total), createdDateforDetails, payment.tender.label, "Info NA"));
                             }

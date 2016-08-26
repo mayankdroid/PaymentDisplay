@@ -1,9 +1,12 @@
 package com.fdc.paymentdisplay.ui;
 
 import com.fdc.paymentdisplay.R;
+import com.fdc.paymentdisplay.modal.OrderModal;
 import com.fdc.paymentdisplay.modal.UserInfo;
 import com.fdc.paymentdisplay.util.Utility;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.Serializable;
 
 /**
  * Created by mgupta4 on 8/25/2016.
@@ -27,6 +32,8 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
     private EditText favBook;
     private Button nextButton;
     private UserInfo userInfo;
+    private ProgressDialog progress;
+    private OrderModal orderModal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +76,8 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
         switch(v.getId()){
 
             case R.id.nextbutton:
-                validateForm();
+                FetchLocalJson fetchLocalJson = new FetchLocalJson();
+                fetchLocalJson.execute("paymentdetails.json");
         }
     }
 
@@ -94,10 +102,71 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
         FragmentTransaction fragmentTransaction = fragManager.beginTransaction();
         Bundle userInfoBundle = new Bundle();
         userInfoBundle.putSerializable("formInfo" , userInfo);
+        userInfoBundle.putSerializable("orders" , orderModal);
         SecondScreenFragment secondScreenFragment = SecondScreenFragment.newInstance(userInfoBundle);
         fragmentTransaction.replace(R.id.fragment_container , secondScreenFragment);
         fragmentTransaction.addToBackStack(SecondScreenFragment.class.getSimpleName());
         fragmentTransaction.commit();
+    }
+
+
+    private class FetchLocalJson extends AsyncTask<String, Void, Serializable> {
+
+        @Override
+        protected void onPreExecute() {
+            progress = new ProgressDialog(getActivity());
+            progress.setMessage("Loading");
+            progress.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Serializable doInBackground(String... params) {
+
+            String response = Utility.loadJSONFromAsset(getActivity(), params[0]);
+            orderModal = (OrderModal) Utility.getObjectFromJSONString(response, OrderModal.class);
+
+            return orderModal;
+        }
+
+        @Override
+        protected void onPostExecute(Serializable orderModal) {
+            if (progress != null && progress.isShowing()) {
+                progress.dismiss();
+            }
+            validateForm();
+            super.onPostExecute(orderModal);
+        }
+    }
+
+
+    private class PostLocalJson extends AsyncTask<String, Void, Serializable> {
+
+        @Override
+        protected void onPreExecute() {
+            progress = new ProgressDialog(getActivity());
+            progress.setMessage("Loading");
+            progress.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Serializable doInBackground(String... params) {
+
+            String response = Utility.loadJSONFromAsset(getActivity(), params[0]);
+            orderModal = (OrderModal) Utility.getObjectFromJSONString(response, OrderModal.class);
+
+            return orderModal;
+        }
+
+        @Override
+        protected void onPostExecute(Serializable orderModal) {
+            if (progress != null && progress.isShowing()) {
+                progress.dismiss();
+            }
+            validateForm();
+            super.onPostExecute(orderModal);
+        }
     }
 
 

@@ -30,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/addressphonenumberlbl"
         android:gravity="center_horizontal"
-        android:text="Fav Book :Sherlock" />
+        android:text="Fav Book :Sherlock"
+        android:textColor="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/transactiondetails"
@@ -40,13 +41,21 @@
         android:layout_below="@id/favbook"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
-        android:text="Transaction Details :" />
+        android:text="Please find the details of Transaction :" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/transactiondetails"
+        android:background="@color/dark_gray"
+        android:layout_marginTop="16dp"></View>
 
     <RelativeLayout
         android:id="@+id/transactionid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/transactiondetails"
+        android:layout_below="@id/separator"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="12dp"
@@ -55,7 +64,7 @@
 
         <TextView
             android:id="@+id/transactionidlabel"
-            style="@style/Text.Body"
+            style="@style/Text.SubHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -72,6 +81,8 @@
 
     </RelativeLayout>
 
+
+
     <RelativeLayout
         android:id="@+id/employeeid"
         android:layout_width="match_parent"
@@ -85,7 +96,7 @@
 
         <TextView
             android:id="@+id/employeeidlabel"
-            style="@style/Text.Body"
+            style="@style/Text.SubHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -115,7 +126,7 @@
 
         <TextView
             android:id="@+id/totalamountlabel"
-            style="@style/Text.Body"
+            style="@style/Text.SubHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -145,7 +156,7 @@
 
         <TextView
             android:id="@+id/createdtimeidlabel"
-            style="@style/Text.Body"
+            style="@style/Text.SubHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -176,7 +187,7 @@
 
         <TextView
             android:id="@+id/paymenttypelabel"
-            style="@style/Text.Body"
+            style="@style/Text.SubHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -192,6 +203,14 @@
             android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>
+
+    <View
+        android:id="@+id/end_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/paymenttype"
+        android:background="@color/dark_gray"
+        android:layout_marginTop="16dp"></View>
 
 
 </RelativeLayout>

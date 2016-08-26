@@ -24,7 +24,8 @@
         <EditText
             android:id="@+id/firstname_et"
             android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
 
     </LinearLayout>
 
@@ -46,7 +47,8 @@
         <EditText
             android:id="@+id/lastname_et"
             android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
 
     </LinearLayout>
 
@@ -91,7 +93,8 @@
         <EditText
             android:id="@+id/address_et"
             android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
 
     </LinearLayout>
 
@@ -113,7 +116,8 @@
         <EditText
             android:id="@+id/favoritebook_et"
             android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
 
     </LinearLayout>
 
