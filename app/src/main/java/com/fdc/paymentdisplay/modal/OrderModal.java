@@ -4,6 +4,8 @@ package com.fdc.paymentdisplay.modal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fdc.paymentdisplay.PaymentDetailsInterface;
 import com.google.gson.annotations.SerializedName;
 import com.fdc.paymentdisplay.util.Struct;
 
@@ -17,7 +19,7 @@ public class OrderModal implements Serializable{
         @SerializedName("payments")
         public List<Payment> payments;
 
-        public static class Payment {
+        public static class Payment implements PaymentDetailsInterface , Serializable{
             @SerializedName("id")
             public String id;
             @SerializedName("amount")

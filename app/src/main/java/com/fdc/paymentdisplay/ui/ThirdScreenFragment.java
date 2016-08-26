@@ -1,16 +1,17 @@
 package com.fdc.paymentdisplay.ui;
 
-import com.fdc.paymentdisplay.R;
-import com.fdc.paymentdisplay.constant.Constants;
-import com.fdc.paymentdisplay.modal.PaymentRowDetails;
-import com.fdc.paymentdisplay.modal.UserInfo;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.fdc.paymentdisplay.R;
+import com.fdc.paymentdisplay.constant.Constants;
+import com.fdc.paymentdisplay.modal.OrderModal;
+import com.fdc.paymentdisplay.modal.UserInfo;
+import com.fdc.paymentdisplay.util.Utility;
 
 /**
  * Created by mgupta4 on 8/25/2016.
@@ -27,7 +28,7 @@ public class ThirdScreenFragment extends Fragment {
     private TextView transactionTime;
     private TextView paymentType;
     private UserInfo userInfo;
-    private PaymentRowDetails paymentRowDetails;
+    private OrderModal.Orders.Payment payment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +37,7 @@ public class ThirdScreenFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             userInfo = (UserInfo) bundle.get(Constants.USERINFO);
-            paymentRowDetails = (PaymentRowDetails) bundle.get(Constants.TRANSACTIONINFO);
+            payment = (OrderModal.Orders.Payment) bundle.get(Constants.TRANSACTIONINFO);
         }
         initialize();
         bindData();
@@ -47,15 +48,21 @@ public class ThirdScreenFragment extends Fragment {
         userName.setText("Hello " + userInfo.getFirstName() + " " + userInfo.getLastName());
         useraddress.setText(userInfo.getAddress() + " | M : " + userInfo.getPhoneNumber());
         favBook.setText("Favorite  Book : " + userInfo.getFavBook());
-        transactionId.setText(paymentRowDetails.getTransactionId());
-        employeeId.setText(paymentRowDetails.getEmployeeId());
-        totalAmount.setText(paymentRowDetails.getCurrency() + " " + paymentRowDetails.getTotalAmount());
-        transactionTime.setText(paymentRowDetails.getTimeOfTransaction());
-        if (paymentRowDetails.getPaymentMode().contains("Card"))
-            paymentType.setText(paymentRowDetails.getPaymentType() + " " + paymentRowDetails.getCardNumber());
-        else {
-            paymentType.setText(paymentRowDetails.getPaymentMode());
+        transactionId.setText(payment.id);
+        employeeId.setText(payment.employeeId);
+        if(payment.order!=null){
+            totalAmount.setText(payment.order.currency + " " + payment.order.total);
         }
+        String createdDateforDetails = Utility.getDateByFormat(payment.createdTime, Constants.DETAIL_DATEFORMATTER);
+        transactionTime.setText(createdDateforDetails);
+        if(payment.tender!=null){
+            if (payment.tender.label.contains("Card") && payment.cardTransaction!=null)
+                paymentType.setText(payment.cardTransaction.cardType + " " + payment.cardTransaction.last4);
+            else {
+                paymentType.setText(payment.tender.label);
+            }
+        }
+
     }
 
     private void initialize() {

@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.fdc.paymentdisplay.PaymentDetailsInterface;
 import com.fdc.paymentdisplay.R;
 import com.fdc.paymentdisplay.constant.Constants;
+import com.fdc.paymentdisplay.modal.OrderModal;
 import com.fdc.paymentdisplay.modal.PaymentDate;
-import com.fdc.paymentdisplay.modal.PaymentRowDetails;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class PaymentCustomAdaptor extends BaseAdapter {
 
         int itemType = Constants.HEADER_ROW;
 
-        if (mPaymentDetailsInterfaceList.get(position) instanceof PaymentRowDetails) {
+        if (mPaymentDetailsInterfaceList.get(position) instanceof OrderModal.Orders.Payment) {
             itemType = Constants.DETAIL_ROW;
         }
 
@@ -93,14 +93,21 @@ public class PaymentCustomAdaptor extends BaseAdapter {
                 } else {
                     view = convertView;
                 }
-
+                String paymentType = "";
                 ViewHolder detailRowHolder = (ViewHolder) view.getTag();
-                String paymentType = ((PaymentRowDetails) paymentDetailsInterface).getPaymentType();
-                String paymentAmount = ((PaymentRowDetails) paymentDetailsInterface).getPaymentAmount();
-                if (((PaymentRowDetails) paymentDetailsInterface).getPaymentMode().contains("Card")) {
-                    detailRowHolder.paymentType.setText("Card-" + paymentType);
-                } else {
-                    detailRowHolder.paymentType.setText(paymentType);
+                if(((OrderModal.Orders.Payment) paymentDetailsInterface).cardTransaction!=null){
+                    paymentType = ((OrderModal.Orders.Payment) paymentDetailsInterface).cardTransaction.cardType;
+                }else if(((OrderModal.Orders.Payment) paymentDetailsInterface).tender!=null){
+                    paymentType = ((OrderModal.Orders.Payment) paymentDetailsInterface).tender.label;
+                }
+
+                String paymentAmount = String.valueOf(((OrderModal.Orders.Payment) paymentDetailsInterface).amount);
+                if(((OrderModal.Orders.Payment) paymentDetailsInterface).tender!=null){
+                    if (((OrderModal.Orders.Payment) paymentDetailsInterface).tender.label.contains("Card")) {
+                        detailRowHolder.paymentType.setText("Card-" + paymentType);
+                    } else {
+                        detailRowHolder.paymentType.setText(paymentType);
+                    }
                 }
                 detailRowHolder.paymentAmount.setText("$ " + paymentAmount);
 

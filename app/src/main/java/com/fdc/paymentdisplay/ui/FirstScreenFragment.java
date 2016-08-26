@@ -144,9 +144,6 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
 
         @Override
         protected void onPostExecute(Serializable orderModal) {
-            if (progress != null && progress.isShowing()) {
-                progress.dismiss();
-            }
             validateForm();
             super.onPostExecute(orderModal);
         }
@@ -157,9 +154,9 @@ public class FirstScreenFragment extends Fragment implements View.OnClickListene
 
         @Override
         protected void onPreExecute() {
-            progress = new ProgressDialog(getActivity());
-            progress.setMessage("Posting Details...");
-            progress.show();
+            if (progress != null && progress.isShowing()) {
+                progress.setMessage("Posting Details...");
+            }
             super.onPreExecute();
         }
 
