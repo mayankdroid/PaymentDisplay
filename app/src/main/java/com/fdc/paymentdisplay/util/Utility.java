@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -82,7 +83,7 @@ public class Utility {
     }
 
     public static Map<String, List<OrderModal.Orders.Payment>> groupPayments(ArrayList<OrderModal.Orders.Payment> list){
-        Map<String, List<OrderModal.Orders.Payment>> map = new TreeMap<String, List<OrderModal.Orders.Payment>>();
+        TreeMap<String, List<OrderModal.Orders.Payment>> map = new TreeMap<String, List<OrderModal.Orders.Payment>>(Collections.reverseOrder());
         for(int i=0;i<list.size();i++){
             OrderModal.Orders.Payment p = (OrderModal.Orders.Payment) list.get(i);
             String key = getDateByFormat(p.createdTime, "yyyy-MM-dd");

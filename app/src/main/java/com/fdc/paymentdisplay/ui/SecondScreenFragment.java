@@ -126,7 +126,7 @@ public class SecondScreenFragment extends Fragment {
     }
 
     private void populatePaymentDetails(Serializable orderModal) {
-        Map<String, List<OrderModal.Orders.Payment>> datePaymentMap ;
+        Map<String, List<OrderModal.Orders.Payment>> datePaymentMap;
         List<OrderModal.Orders.Payment> payments = new ArrayList<>();
         try {
             if (orderModal != null) {
@@ -134,33 +134,24 @@ public class SecondScreenFragment extends Fragment {
                 for (OrderModal.Orders orderObj : ((OrderModal) orderModal).orders) {
                     payments.addAll(orderObj.payments);
                 }
-
                 if (payments != null) {
-
-                /*    Collections.sort(payments, new Comparator<OrderModal.Orders.Payment>() {
-                        public int compare(OrderModal.Orders.Payment p1, OrderModal.Orders.Payment p2) {
-
-                            if (p1.createdTime == p2.createdTime){
-                                return 0;
-                            }else if (p1.createdTime > p2.createdTime) {
-                                return 1;
-                            } else {
-                                return -1;
-                            }
-                        }
-                    });*/
-                    datePaymentMap = Utility.groupPayments((ArrayList<OrderModal.Orders.Payment>)payments);
-
+                    datePaymentMap = Utility.groupPayments((ArrayList<OrderModal.Orders.Payment>) payments);
                     paymentDetailsInterfaceList.clear();
                     for (String headerDate : datePaymentMap.keySet()) {
+                        //creating the header in the adapter list
                         paymentDetailsInterfaceList.add(new PaymentDate(headerDate));
                         List<OrderModal.Orders.Payment> subPayments = datePaymentMap.get(headerDate);
-                        for(OrderModal.Orders.Payment payment : subPayments){
+                        for (OrderModal.Orders.Payment payment : subPayments) {
                             String createdDateforDetails = Utility.getDateByFormat(payment.createdTime, "MMMM dd,yyyy");
-                            if (payment.cardTransaction != null ) {
-                                paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.cardTransaction.cardType, String.valueOf(payment.amount), payment.id, payment.employeeId, payment.order.currency, String.valueOf(payment.order.total), createdDateforDetails , payment.tender.label , payment.cardTransaction.last4));
+                            if (payment.cardTransaction != null) {
+                                if (payment.order != null && payment.tender != null) {
+                                    paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.cardTransaction.cardType, String.valueOf(payment.amount), payment.id, payment.employeeId, payment.order.currency, String.valueOf(payment.order.total), createdDateforDetails, payment.tender.label, payment.cardTransaction.last4));
+                                } else {
+                                    paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.cardTransaction.cardType, String.valueOf(payment.amount), payment.id, payment.employeeId, "Info NA", "Info NA", createdDateforDetails, "Info NA", payment.cardTransaction.last4));
+                                }
+
                             } else {
-                                paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.tender.label , String.valueOf(payment.amount), payment.id, payment.employeeId, payment.order.currency, String.valueOf(payment.order.total), createdDateforDetails,payment.tender.label , "Info NA"));
+                                paymentDetailsInterfaceList.add(new PaymentRowDetails(payment.tender.label, String.valueOf(payment.amount), payment.id, payment.employeeId, payment.order.currency, String.valueOf(payment.order.total), createdDateforDetails, payment.tender.label, "Info NA"));
                             }
                         }
                     }
